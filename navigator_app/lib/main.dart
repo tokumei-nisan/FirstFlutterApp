@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_app/second_page.dart';
+import 'package:navigator_app/third_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,9 +13,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: false,  // Material 3を無効にする
-      ),
+      routes: <String, WidgetBuilder> {
+        '/first': (BuildContext context) => const FirstPage(),
+        '/second': (BuildContext context) => const SecondPage(),
+        '/third': (BuildContext context) => const ThirdPage(),
+      },
       home: const FirstPage(),
     );
   }
@@ -35,10 +39,16 @@ class FirstPage extends StatelessWidget {
             const Text('First Page', style: TextStyle(fontSize: 40.0)),
             ElevatedButton(
               onPressed: () {
-                // ボタンのタップイベントを書く
+                Navigator.of(context).pushNamed('/second');
               },
               child: const Text('Go to Second Page'),
-            )
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/third');
+              },
+              child: const Text('Go to Third Page'),
+            ),
           ],
         ),
       ),
